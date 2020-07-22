@@ -1,12 +1,13 @@
 package com.dovile.simplerest.controllers;
 
+import com.dovile.simplerest.domain.request.OwnerRequest;
+import com.dovile.simplerest.domain.response.OwnerResponse;
 import com.dovile.simplerest.entities.OwnerEntity;
 import com.dovile.simplerest.services.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,8 +18,13 @@ public class OwnerController {
     private OwnerService ownerService;
 
     @GetMapping
-    public List<OwnerEntity> getAllOwners(){
+    public List<OwnerResponse> getAllOwners(){
         return ownerService.findAllOwners();
+    }
+
+    @PostMapping("/addOwner")
+    public OwnerResponse createOwner(@RequestBody @Valid OwnerRequest owner){
+        return ownerService.createOwner(owner);
     }
 
 }
