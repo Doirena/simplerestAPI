@@ -1,8 +1,8 @@
 package com.dovile.simplerest.services;
 
-import com.dovile.simplerest.domain.Owner;
+import com.dovile.simplerest.domain.request.OwnerRequest;
+import com.dovile.simplerest.domain.response.OwnerResponse;
 import com.dovile.simplerest.entities.OwnerEntity;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +15,7 @@ public interface OwnerService {
     /**
      * @return list of Owner
      */
-    List<OwnerEntity> findAllOwners();
+    List<OwnerResponse> findAllOwners();
 
     /**
      * @param id
@@ -27,7 +27,7 @@ public interface OwnerService {
      * @param owner
      * @return crete new Owner
      */
-    OwnerEntity createOwner(Owner owner);
+    OwnerResponse createOwner(OwnerRequest owner);
 
     /**
      * @param id
