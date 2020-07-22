@@ -6,6 +6,7 @@ import com.dovile.simplerest.entities.OwnerEntity;
 import com.dovile.simplerest.exception.ResourceNotFoundException;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -31,9 +32,11 @@ public interface OwnerService {
     OwnerResponse createOwner(OwnerRequest owner);
 
     /**
+     *
      * @param id
+     * @return true/false
      */
-    void deleteOwnerById(Integer id);
+    Map<String, Boolean> deleteOwnerById(Integer id) throws Exception;
 
     /**
      * @param ownerName
