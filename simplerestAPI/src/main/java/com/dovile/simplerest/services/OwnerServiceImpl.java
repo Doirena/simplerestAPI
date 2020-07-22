@@ -1,11 +1,13 @@
 package com.dovile.simplerest.services;
 
-import com.dovile.simplerest.domain.Owner;
+import com.dovile.simplerest.domain.request.OwnerRequest;
+import com.dovile.simplerest.domain.response.OwnerResponse;
 import com.dovile.simplerest.entities.OwnerEntity;
 import com.dovile.simplerest.repositories.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +18,13 @@ public class OwnerServiceImpl implements OwnerService {
     private OwnerRepository ownerRepository;
 
 
-    public List<OwnerEntity> findAllOwners() {
-        return ownerRepository.findAll();
+    public List<OwnerResponse> findAllOwners() {
+       List<OwnerResponse>ownerList = new ArrayList<OwnerResponse>();
+       List<OwnerEntity> ownerEList = ownerRepository.findAll();
+       for (int i=0; i<ownerEList.size(); i++){
+           ownerList.add(new OwnerResponse(ownerEList.get(i).getName()));
+       }
+        return ownerList;
     }
 
     public Optional<OwnerEntity> findOwnerById(Integer id) {
@@ -25,10 +32,13 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
 
-    public OwnerEntity createOwner(Owner owner) {
-        OwnerEntity ownerE = new OwnerEntity();
+    public OwnerResponse createOwner(OwnerRequest owner) {
+        OwnerEntity ownerE =new OwnerEntity();
         ownerE.setName(owner.getName());
-        return ownerRepository.save(ownerE);
+        ownerRepository.save(ownerE);
+        OwnerResponse ownerResponse=new OwnerResponse();
+        ownerResponse.setName(ownerE.getName());
+        return ownerResponse;
     }
 
 
