@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/owners")
@@ -34,9 +35,15 @@ public class OwnerController {
     }
 
     @PutMapping("/{id}")
-    public OwnerResponse updateOwner(@PathVariable(value = "id") Integer ownerId, @RequestBody @Valid OwnerRequest owner )
+    public OwnerResponse updateOwner(@PathVariable(value = "id") Integer ownerId, @RequestBody @Valid OwnerRequest owner)
             throws ResourceNotFoundException {
-        return  ownerService.refurbishOnwer(ownerId, owner);
+        return ownerService.refurbishOnwer(ownerId, owner);
+    }
+
+    @DeleteMapping("/{id}")
+    public Map<String, Boolean> deleteOwner(@PathVariable(value = "id") Integer ownerId)
+            throws Exception {
+        return ownerService.deleteOwnerById(ownerId);
     }
 
 
