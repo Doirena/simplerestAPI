@@ -41,4 +41,12 @@ public interface OwnerService {
      */
     OwnerEntity findOwnerByName(String ownerName);
 
+    /**
+     *
+     * @param id
+     * @param owner
+     * @return update Owner
+     */
+    OwnerResponse refurbishOnwer(Integer id, OwnerRequest owner) throws ResourceNotFoundException;
+
 }
