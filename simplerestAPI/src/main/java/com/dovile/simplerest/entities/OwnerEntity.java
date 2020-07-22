@@ -4,6 +4,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "owner")
+@NamedQueries({
+        @NamedQuery(name = "OwnerEntity.findBYName", query = "SELECT o FROM OwnerEntity o WHERE o.name =: owner")})
 public class OwnerEntity {
 
     @Id
