@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class OwnerServiceImpl implements OwnerService {
@@ -46,15 +44,20 @@ public class OwnerServiceImpl implements OwnerService {
         return ownerResponse;
     }
 
-    public void deleteOwnerById(Integer id) {
-
+    public Map<String, Boolean> deleteOwnerById(Integer id) throws Exception {
+        OwnerEntity ownerE = ownerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Owner not found on: " + id));
+        ownerRepository.delete(ownerE);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
     }
 
     public OwnerEntity findOwnerByName(String ownerName) {
         return null;
     }
 
-    public OwnerResponse refurbishOnwer (Integer id, OwnerRequest owner) throws ResourceNotFoundException{
+    public OwnerResponse refurbishOnwer(Integer id, OwnerRequest owner) throws ResourceNotFoundException {
         OwnerEntity ownerE = ownerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Owner not found on: " + id));
         ownerE.setName(owner.getName());
