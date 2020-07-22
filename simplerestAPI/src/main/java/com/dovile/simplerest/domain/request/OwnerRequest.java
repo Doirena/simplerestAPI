@@ -1,6 +1,6 @@
-package com.dovile.simplerest.domain;
+package com.dovile.simplerest.domain.request;
 
-public class Owner {
+public class OwnerRequest {
 
     private String name;
 
