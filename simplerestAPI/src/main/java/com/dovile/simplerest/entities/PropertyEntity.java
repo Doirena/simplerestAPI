@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "property")
+@NamedQueries({
+        @NamedQuery(name = "PropertyEntity.findBYType", query = "SELECT p FROM PropertyEntity p WHERE p.type =: property")})
+
 public class PropertyEntity {
 
     @Id
