@@ -53,4 +53,15 @@ public class OwnerServiceImpl implements OwnerService {
     public OwnerEntity findOwnerByName(String ownerName) {
         return null;
     }
+
+    public OwnerResponse refurbishOnwer (Integer id, OwnerRequest owner) throws ResourceNotFoundException{
+        OwnerEntity ownerE = ownerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Owner not found on: " + id));
+        ownerE.setName(owner.getName());
+        //owner.setBuildingRecords(ownerDetails.getBuildingRecords());
+        ownerRepository.save(ownerE);
+        OwnerResponse ownerResponse = new OwnerResponse();
+        ownerResponse.setName(ResponseEntity.ok(ownerE).getBody().getName());
+        return ownerResponse;
+    }
 }
