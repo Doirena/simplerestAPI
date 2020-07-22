@@ -2,11 +2,9 @@ package com.dovile.simplerest.controllers;
 
 import com.dovile.simplerest.domain.request.OwnerRequest;
 import com.dovile.simplerest.domain.response.OwnerResponse;
-import com.dovile.simplerest.entities.OwnerEntity;
 import com.dovile.simplerest.exception.ResourceNotFoundException;
 import com.dovile.simplerest.services.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
