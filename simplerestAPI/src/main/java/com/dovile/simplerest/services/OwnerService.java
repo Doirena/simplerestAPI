@@ -3,6 +3,8 @@ package com.dovile.simplerest.services;
 import com.dovile.simplerest.domain.request.OwnerRequest;
 import com.dovile.simplerest.domain.response.OwnerResponse;
 import com.dovile.simplerest.entities.OwnerEntity;
+import com.dovile.simplerest.exception.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +23,7 @@ public interface OwnerService {
      * @param id
      * @return Owner by id
      */
-    Optional<OwnerEntity> findOwnerById(Integer id);
+    OwnerResponse findOwnerById(Integer id) throws ResourceNotFoundException;
 
     /**
      * @param owner
