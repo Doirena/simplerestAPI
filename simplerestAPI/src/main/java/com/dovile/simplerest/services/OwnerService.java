@@ -4,10 +4,9 @@ import com.dovile.simplerest.domain.request.OwnerRequest;
 import com.dovile.simplerest.domain.response.OwnerResponse;
 import com.dovile.simplerest.entities.OwnerEntity;
 import com.dovile.simplerest.exception.ResourceNotFoundException;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
-import java.util.Optional;
+
 
 /**
  * @author barkauskaite.dovile@gmail.com
