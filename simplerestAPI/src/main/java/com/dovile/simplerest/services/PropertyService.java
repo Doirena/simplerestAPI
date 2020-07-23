@@ -2,6 +2,7 @@ package com.dovile.simplerest.services;
 
 import com.dovile.simplerest.domain.request.PropertyRequest;
 import com.dovile.simplerest.domain.response.PropertyResponse;
+import com.dovile.simplerest.exception.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ public interface PropertyService {
      * @param id
      * @return Property by id
      */
-    PropertyResponse findPropertyById(Integer id);
+    PropertyResponse findPropertyById(Integer id) throws ResourceNotFoundException;
 
     /**
      *
