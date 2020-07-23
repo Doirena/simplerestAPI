@@ -18,18 +18,25 @@ public class PropertyController {
     private PropertyService propertyService;
 
     @GetMapping
-    public List<PropertyResponse> getAllProperties(){
+    public List<PropertyResponse> getAllProperties() {
         return propertyService.findAllProperties();
     }
 
     @GetMapping("/{id}")
-    public PropertyResponse getPropertyByID(@PathVariable (value = "id") Integer propertyId)
+    public PropertyResponse getPropertyByID(@PathVariable(value = "id") Integer propertyId)
             throws ResourceNotFoundException {
         return propertyService.findPropertyById(propertyId);
     }
 
     @PostMapping("/property")
-    public PropertyResponse addNewProperty(@RequestBody @Valid PropertyRequest property){
+    public PropertyResponse addNewProperty(@RequestBody @Valid PropertyRequest property) {
         return propertyService.createProperty(property);
+    }
+
+    @PutMapping("/{id}")
+    public PropertyResponse updateProperty(@PathVariable(value = "id") Integer propertyId,
+                                           @RequestBody @Valid PropertyRequest property)
+            throws ResourceNotFoundException {
+        return propertyService.refurbishProperty(propertyId, property);
     }
 }
