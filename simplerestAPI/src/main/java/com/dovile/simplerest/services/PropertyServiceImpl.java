@@ -3,8 +3,10 @@ package com.dovile.simplerest.services;
 import com.dovile.simplerest.domain.request.PropertyRequest;
 import com.dovile.simplerest.domain.response.PropertyResponse;
 import com.dovile.simplerest.entities.PropertyEntity;
+import com.dovile.simplerest.exception.ResourceNotFoundException;
 import com.dovile.simplerest.repositories.PropertyRespository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,9 +27,13 @@ public class PropertyServiceImpl implements PropertyService {
         return listProperties;
     }
 
-    @Override
-    public PropertyResponse findPropertyById(Integer id) {
-        return null;
+
+    public PropertyResponse findPropertyById(Integer id) throws ResourceNotFoundException {
+        PropertyEntity propertyE = propertyRespository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Property not found on: " + id));
+        PropertyResponse propertyResponse = new PropertyResponse(ResponseEntity.ok().body(propertyE).getBody().getType(),
+                ResponseEntity.ok().body(propertyE).getBody().getTax_rate());
+        return propertyResponse;
     }
 
     @Override
