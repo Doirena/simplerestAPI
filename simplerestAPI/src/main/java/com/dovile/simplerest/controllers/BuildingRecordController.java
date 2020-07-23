@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/records")
@@ -34,5 +35,10 @@ public class BuildingRecordController {
                                                @RequestBody @Valid BuildingRecordsRequest record)
             throws ResourceNotFoundException {
         return buildingRecordService.refurbishRecord(recordId, record);
+    }
+
+    @DeleteMapping("/{id}")
+    public Map<String, Boolean> deleteRecord(@PathVariable(value = "id") Integer recordId) throws Exception {
+        return buildingRecordService.deleteRecord(recordId);
     }
 }
