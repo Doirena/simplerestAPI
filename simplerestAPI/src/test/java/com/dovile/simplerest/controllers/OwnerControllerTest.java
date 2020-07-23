@@ -55,7 +55,7 @@ public class OwnerControllerTest {
     }
 
     @Test
-    public void updateOwner() {
+    public void updateOwner_test() {
         Integer id = 1;
         OwnerResponse ownerResponse = restTemplate.getForObject(getRootUrl() + "/" + id, OwnerResponse.class);
         OwnerRequest owner = new OwnerRequest();
