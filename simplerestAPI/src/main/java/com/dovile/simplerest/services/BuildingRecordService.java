@@ -3,6 +3,7 @@ package com.dovile.simplerest.services;
 import com.dovile.simplerest.domain.request.BuildingRecordsRequest;
 import com.dovile.simplerest.domain.response.BuildingRecordResponse;
 import com.dovile.simplerest.entities.BuildingRecordEntity;
+import com.dovile.simplerest.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,4 +28,13 @@ public interface BuildingRecordService {
      */
     BuildingRecordResponse createRecord(BuildingRecordsRequest record, String owner, String property);
 
+    /**
+     *
+     * @param id
+     * @param record
+     * @return update Building Record
+     * @throws ResourceNotFoundException
+     */
+    BuildingRecordResponse refurbishRecord(Integer id, BuildingRecordsRequest record)
+            throws ResourceNotFoundException;
 }
