@@ -38,7 +38,7 @@ public interface PropertyService {
      * @param property
      * @return update Property
      */
-    PropertyResponse refurbishProperty(Integer id, PropertyRequest property);
+    PropertyResponse refurbishProperty(Integer id, PropertyRequest property) throws ResourceNotFoundException;
 
     /**
      *
