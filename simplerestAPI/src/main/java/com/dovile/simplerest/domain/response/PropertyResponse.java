@@ -27,4 +27,12 @@ public class PropertyResponse {
     public void setTax_rate(double tax_rate) {
         this.tax_rate = tax_rate;
     }
+
+    @Override
+    public String toString() {
+        return "PropertyResponse{" +
+                "type='" + type + '\'' +
+                ", tax_rate=" + tax_rate +
+                '}';
+    }
 }
