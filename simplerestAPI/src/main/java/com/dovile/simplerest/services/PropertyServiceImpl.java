@@ -41,8 +41,7 @@ public class PropertyServiceImpl implements PropertyService {
         propertyE.setTax_rate(property.getTax_rate());
         propertyE.setType(property.getType());
         propertyRespository.save(propertyE);
-        PropertyResponse propertyResponse = new PropertyResponse(propertyE.getType(),propertyE.getTax_rate());
-        return propertyResponse;
+        return new PropertyResponse(propertyE.getType(),propertyE.getTax_rate());
     }
 
     @Override
