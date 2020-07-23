@@ -1,6 +1,9 @@
 package com.dovile.simplerest.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "property")
@@ -14,6 +17,10 @@ public class PropertyEntity {
     private Integer id;
     private String type;
     private double tax_rate;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "propertyType")
+    private List<BuildingRecordEntity> buildingRecord;
 
     public Integer getId() {
         return id;
@@ -37,5 +44,18 @@ public class PropertyEntity {
 
     public void setTax_rate(double tax_rate) {
         this.tax_rate = tax_rate;
+    }
+
+    public List<BuildingRecordEntity> getBuildingRecord() {
+        return buildingRecord;
+    }
+
+    public void setBuildingRecord(List<BuildingRecordEntity> buildingRecord) {
+        this.buildingRecord = buildingRecord;
+    }
+
+    @Override
+    public String toString() {
+        return id+" "+type+" "+tax_rate+" "+buildingRecord;
     }
 }
