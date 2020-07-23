@@ -37,6 +37,7 @@ public interface PropertyService {
      * @param id
      * @param property
      * @return update Property
+     * @throws ResourceNotFoundException
      */
     PropertyResponse refurbishProperty(Integer id, PropertyRequest property) throws ResourceNotFoundException;
 
@@ -44,8 +45,9 @@ public interface PropertyService {
      *
      * @param id
      * @return true/false when delete Property
+     * @throws Exception
      */
-    Map<String, Boolean> deleteProperty(Integer id);
+    Map<String, Boolean> deleteProperty(Integer id) throws Exception;
 
 
 }
