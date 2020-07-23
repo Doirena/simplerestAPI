@@ -1,12 +1,10 @@
 package com.dovile.simplerest.controllers;
 
+import com.dovile.simplerest.domain.request.BuildingRecordsRequest;
 import com.dovile.simplerest.domain.response.BuildingRecordResponse;
-import com.dovile.simplerest.entities.BuildingRecordEntity;
 import com.dovile.simplerest.services.BuildingRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +17,13 @@ public class BuildingRecordController {
     @GetMapping
     public List<BuildingRecordResponse> findAllRecords(){
         return buildingRecordService.findAllRecords();
+    }
+
+    @PostMapping(value ="/record",  params = {"owner","property"})
+    public BuildingRecordResponse createRecord(
+            @RequestBody BuildingRecordsRequest record,
+            @RequestParam(value = "owner") String owner,
+            @RequestParam(value = "property") String property){
+        return buildingRecordService.createRecord(record, owner, property);
     }
 }
