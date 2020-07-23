@@ -106,4 +106,12 @@ public class BuildingRecordServiceImpl implements BuildingRecordService {
         }
         return result;
     }
+
+    public BuildingRecordResponse getOneRecord(Integer id) throws ResourceNotFoundException {
+        BuildingRecordEntity recordE = buildingRecordRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Record not found on: " + id));
+        return new BuildingRecordResponse(recordE.getAddress(), recordE.getSize(), recordE.getValue(),
+                new OwnerResponse(recordE.getOwner().getName()),
+                new PropertyResponse(recordE.getPropertyType().getType(), recordE.getPropertyType().getTax_rate()));
+    }
 }
