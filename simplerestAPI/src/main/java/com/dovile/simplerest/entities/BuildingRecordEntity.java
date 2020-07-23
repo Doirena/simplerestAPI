@@ -69,4 +69,16 @@ public class BuildingRecordEntity {
     public void setPropertyType(PropertyEntity propertyType) {
         this.propertyType = propertyType;
     }
+
+    @Override
+    public String toString() {
+        return "BuildingRecordEntity{" +
+                "id=" + id +
+                ", address='" + address + '\'' +
+                ", size=" + size +
+                ", value=" + value +
+                ", owner=" + owner +
+                ", propertyType=" + propertyType +
+                '}';
+    }
 }
