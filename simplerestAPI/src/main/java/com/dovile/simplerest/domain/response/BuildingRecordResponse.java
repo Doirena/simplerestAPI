@@ -58,4 +58,15 @@ public class BuildingRecordResponse {
     public void setProperty(PropertyResponse property) {
         this.property = property;
     }
+
+    @Override
+    public String toString() {
+        return "BuildingRecordResponse{" +
+                "address='" + address + '\'' +
+                ", size=" + size +
+                ", value=" + value +
+                ", owner=" + owner +
+                ", property=" + property +
+                '}';
+    }
 }
