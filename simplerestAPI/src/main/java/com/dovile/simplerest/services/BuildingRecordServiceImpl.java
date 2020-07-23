@@ -16,7 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BuildingRecordServiceImpl implements BuildingRecordService {
@@ -67,16 +69,16 @@ public class BuildingRecordServiceImpl implements BuildingRecordService {
             throws ResourceNotFoundException {
         BuildingRecordEntity recordE = buildingRecordRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Record not found on: " + id));
-        if(record.getAddress() != null){
+        if (record.getAddress() != null) {
             recordE.setAddress(record.getAddress());
         }
-        if (record.getSize() != 0.0){
+        if (record.getSize() != 0.0) {
             recordE.setSize(record.getSize());
         }
-        if (record.getValue() != 0.0){
+        if (record.getValue() != 0.0) {
             recordE.setValue(record.getValue());
         }
-        BuildingRecordEntity recordESave= buildingRecordRepository.save(recordE);
+        BuildingRecordEntity recordESave = buildingRecordRepository.save(recordE);
         ResponseEntity<BuildingRecordEntity> recordEntity = ResponseEntity.ok(recordESave);
 
         return new BuildingRecordResponse(recordEntity.getBody().getAddress(),
@@ -84,5 +86,15 @@ public class BuildingRecordServiceImpl implements BuildingRecordService {
                 new OwnerResponse(recordEntity.getBody().getOwner().getName()),
                 new PropertyResponse(recordEntity.getBody().getPropertyType().getType(),
                         recordEntity.getBody().getPropertyType().getTax_rate()));
+    }
+
+    public Map<String, Boolean> deleteRecord(Integer id) throws Exception {
+        BuildingRecordEntity record = buildingRecordRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Record not found on: " + id));
+
+        buildingRecordRepository.delete(record);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
     }
 }
