@@ -23,7 +23,6 @@ public class OwnerEntity {
     }
 
     public OwnerEntity(String name) {
-        this.id = id;
         this.name = name;
     }
 
@@ -53,6 +52,6 @@ public class OwnerEntity {
 
     @Override
     public String toString() {
-        return  id +" "+ name + " " + buildingRecord;
+        return  name;
     }
 }
