@@ -4,8 +4,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "building_records")
-public class BuildingRecordEntity {
+@NamedQueries(value = {
+        @NamedQuery(name = "BuildingRecordEntity.RealEstateTaxes", query = "SELECT SUM(b.value*(p.tax_rate/100)) FROM BuildingRecordEntity b join b.owner o join b.propertyType p WHERE (o.id = :id)")})
 
+public class BuildingRecordEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
