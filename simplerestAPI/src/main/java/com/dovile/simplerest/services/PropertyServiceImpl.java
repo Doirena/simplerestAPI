@@ -2,6 +2,7 @@ package com.dovile.simplerest.services;
 
 import com.dovile.simplerest.domain.request.PropertyRequest;
 import com.dovile.simplerest.domain.response.PropertyResponse;
+import com.dovile.simplerest.entities.OwnerEntity;
 import com.dovile.simplerest.entities.PropertyEntity;
 import com.dovile.simplerest.exception.ResourceNotFoundException;
 import com.dovile.simplerest.repositories.PropertyRespository;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,8 +61,12 @@ public class PropertyServiceImpl implements PropertyService {
                 ResponseEntity.ok(propertyE).getBody().getTax_rate());
     }
 
-    @Override
-    public Map<String, Boolean> deleteProperty(Integer id) {
-        return null;
+    public Map<String, Boolean> deleteProperty(Integer id) throws Exception {
+       PropertyEntity propertyE = propertyRespository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Property not found on: " + id));
+        propertyRespository.delete(propertyE);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
     }
 }
