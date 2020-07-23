@@ -7,6 +7,7 @@ import com.dovile.simplerest.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author barkauskaite.dovile@gmail.com
@@ -37,4 +38,12 @@ public interface BuildingRecordService {
      */
     BuildingRecordResponse refurbishRecord(Integer id, BuildingRecordsRequest record)
             throws ResourceNotFoundException;
+
+    /**
+     *
+     * @param id
+     * @return true/false
+     * @throws Exception
+     */
+    Map<String, Boolean> deleteRecord(Integer id) throws Exception;
 }
