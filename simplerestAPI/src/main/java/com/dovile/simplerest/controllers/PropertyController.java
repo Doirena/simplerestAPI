@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/properties")
@@ -38,5 +39,11 @@ public class PropertyController {
                                            @RequestBody @Valid PropertyRequest property)
             throws ResourceNotFoundException {
         return propertyService.refurbishProperty(propertyId, property);
+    }
+
+    @DeleteMapping("/{id}")
+    public Map<String, Boolean> deletePropperty(@PathVariable(value = "id") Integer propertId)
+            throws Exception {
+        return propertyService.deleteProperty(propertId);
     }
 }
