@@ -42,12 +42,6 @@ public interface OwnerService {
     Map<String, Boolean> deleteOwnerById(Integer id) throws Exception;
 
     /**
-     * @param ownerName
-     * @return owner by name
-     */
-    OwnerEntity findOwnerByName(String ownerName);
-
-    /**
      *
      * @param id
      * @param owner
