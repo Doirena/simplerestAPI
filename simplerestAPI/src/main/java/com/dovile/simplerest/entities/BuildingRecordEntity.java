@@ -22,6 +22,18 @@ public class BuildingRecordEntity {
     @ManyToOne(optional = false)
     private PropertyEntity propertyType;
 
+    public BuildingRecordEntity() {
+    }
+
+    public BuildingRecordEntity(String address, double size, double value, OwnerEntity owner,
+                                PropertyEntity propertyType) {
+        this.address = address;
+        this.size = size;
+        this.value = value;
+        this.owner = owner;
+        this.propertyType = propertyType;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -72,13 +84,6 @@ public class BuildingRecordEntity {
 
     @Override
     public String toString() {
-        return "BuildingRecordEntity{" +
-                "id=" + id +
-                ", address='" + address + '\'' +
-                ", size=" + size +
-                ", value=" + value +
-                ", owner=" + owner +
-                ", propertyType=" + propertyType +
-                '}';
+        return address +" " + size +" " + value +" " + owner + " " + propertyType;
     }
 }
