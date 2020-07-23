@@ -54,6 +54,6 @@ public interface OwnerService {
      * @return update Owner
      * @throws ResourceNotFoundException
      */
-    OwnerResponse refurbishOnwer(Integer id, OwnerRequest owner) throws ResourceNotFoundException;
+    OwnerResponse refurbishOwner(Integer id, OwnerRequest owner) throws ResourceNotFoundException;
 
 }
