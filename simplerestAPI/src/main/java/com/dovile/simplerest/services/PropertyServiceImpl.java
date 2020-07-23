@@ -21,8 +21,8 @@ public class PropertyServiceImpl implements PropertyService {
 
     public List<PropertyResponse> findAllProperties() {
         List<PropertyResponse> listProperties = new ArrayList<PropertyResponse>();
-        for (PropertyEntity propertyE:propertyRespository.findAll()) {
-            listProperties.add(new PropertyResponse(propertyE.getType(),propertyE.getTax_rate()));
+        for (PropertyEntity propertyE : propertyRespository.findAll()) {
+            listProperties.add(new PropertyResponse(propertyE.getType(), propertyE.getTax_rate()));
         }
         return listProperties;
     }
@@ -41,15 +41,15 @@ public class PropertyServiceImpl implements PropertyService {
         propertyE.setTax_rate(property.getTax_rate());
         propertyE.setType(property.getType());
         propertyRespository.save(propertyE);
-        return new PropertyResponse(propertyE.getType(),propertyE.getTax_rate());
+        return new PropertyResponse(propertyE.getType(), propertyE.getTax_rate());
     }
 
-    @Override
     public PropertyResponse refurbishProperty(Integer id, PropertyRequest property) throws ResourceNotFoundException {
         PropertyEntity propertyE = propertyRespository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Property not found on: " + id));
-
-        propertyE.setTax_rate(property.getTax_rate());
+        if (property.getTax_rate() != 0.0) {
+            propertyE.setTax_rate(property.getTax_rate());
+        }
         if (property.getType() != null) {
             property.setType(property.getType());
         }
