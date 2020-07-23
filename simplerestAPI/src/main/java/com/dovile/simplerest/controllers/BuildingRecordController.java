@@ -41,4 +41,9 @@ public class BuildingRecordController {
     public Map<String, Boolean> deleteRecord(@PathVariable(value = "id") Integer recordId) throws Exception {
         return buildingRecordService.deleteRecord(recordId);
     }
+
+    @GetMapping("/taxes/{id}")
+    public String getTaxes(@PathVariable(value = "id") Integer ownerId){
+        return buildingRecordService.calculateTaxesByOwnerId(ownerId);
+    }
 }
