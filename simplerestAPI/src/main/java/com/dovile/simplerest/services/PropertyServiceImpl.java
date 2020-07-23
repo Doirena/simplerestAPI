@@ -52,7 +52,7 @@ public class PropertyServiceImpl implements PropertyService {
             propertyE.setTax_rate(property.getTax_rate());
         }
         if (property.getType() != null) {
-            property.setType(property.getType());
+            propertyE.setType(property.getType());
         }
         //property.setBuildingRecords(propertyDetails.getBuildingRecords());
         propertyRespository.save(propertyE);
