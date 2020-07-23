@@ -2,9 +2,8 @@ package com.dovile.simplerest.services;
 
 import com.dovile.simplerest.domain.request.BuildingRecordsRequest;
 import com.dovile.simplerest.domain.response.BuildingRecordResponse;
-import com.dovile.simplerest.entities.BuildingRecordEntity;
 import com.dovile.simplerest.exception.ResourceNotFoundException;
-import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Map;
