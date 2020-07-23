@@ -19,9 +19,8 @@ public class OwnerServiceImpl implements OwnerService {
 
     public List<OwnerResponse> findAllOwners() {
         List<OwnerResponse> ownerList = new ArrayList<OwnerResponse>();
-        List<OwnerEntity> ownerEList = ownerRepository.findAll();
-        for (int i = 0; i < ownerEList.size(); i++) {
-            ownerList.add(new OwnerResponse(ownerEList.get(i).getName()));
+        for (OwnerEntity ownerE : ownerRepository.findAll()) {
+            ownerList.add(new OwnerResponse(ownerE.getName()));
         }
         return ownerList;
     }
