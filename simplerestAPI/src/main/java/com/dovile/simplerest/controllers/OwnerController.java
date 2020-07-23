@@ -37,7 +37,7 @@ public class OwnerController {
     @PutMapping("/{id}")
     public OwnerResponse updateOwner(@PathVariable(value = "id") Integer ownerId, @RequestBody @Valid OwnerRequest owner)
             throws ResourceNotFoundException {
-        return ownerService.refurbishOnwer(ownerId, owner);
+        return ownerService.refurbishOwner(ownerId, owner);
     }
 
     @DeleteMapping("/{id}")
