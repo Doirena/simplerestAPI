@@ -52,14 +52,12 @@ public class OwnerServiceImpl implements OwnerService {
         return null;
     }
 
-    public OwnerResponse refurbishOnwer(Integer id, OwnerRequest owner) throws ResourceNotFoundException {
+    public OwnerResponse refurbishOwner(Integer id, OwnerRequest owner) throws ResourceNotFoundException {
         OwnerEntity ownerE = ownerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Owner not found on: " + id));
         ownerE.setName(owner.getName());
         //owner.setBuildingRecords(ownerDetails.getBuildingRecords());
         ownerRepository.save(ownerE);
-        OwnerResponse ownerResponse = new OwnerResponse();
-        ownerResponse.setName(ResponseEntity.ok(ownerE).getBody().getName());
-        return ownerResponse;
+        return new OwnerResponse(ResponseEntity.ok(ownerE).getBody().getName());
     }
 }
