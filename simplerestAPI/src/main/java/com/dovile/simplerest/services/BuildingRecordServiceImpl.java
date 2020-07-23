@@ -7,10 +7,12 @@ import com.dovile.simplerest.domain.response.PropertyResponse;
 import com.dovile.simplerest.entities.BuildingRecordEntity;
 import com.dovile.simplerest.entities.OwnerEntity;
 import com.dovile.simplerest.entities.PropertyEntity;
+import com.dovile.simplerest.exception.ResourceNotFoundException;
 import com.dovile.simplerest.repositories.BuildingRecordRepository;
 import com.dovile.simplerest.repositories.OwnerRepository;
 import com.dovile.simplerest.repositories.PropertyRespository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -59,5 +61,28 @@ public class BuildingRecordServiceImpl implements BuildingRecordService {
         return new BuildingRecordResponse(recordE.getAddress(), recordE.getSize(), recordE.getValue(),
                 new OwnerResponse(recordE.getOwner().getName()),
                 new PropertyResponse(recordE.getPropertyType().getType(), recordE.getPropertyType().getTax_rate()));
+    }
+
+    public BuildingRecordResponse refurbishRecord(Integer id, BuildingRecordsRequest record)
+            throws ResourceNotFoundException {
+        BuildingRecordEntity recordE = buildingRecordRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Record not found on: " + id));
+        if(record.getAddress() != null){
+            recordE.setAddress(record.getAddress());
+        }
+        if (record.getSize() != 0.0){
+            recordE.setSize(record.getSize());
+        }
+        if (record.getValue() != 0.0){
+            recordE.setValue(record.getValue());
+        }
+        BuildingRecordEntity recordESave= buildingRecordRepository.save(recordE);
+        ResponseEntity<BuildingRecordEntity> recordEntity = ResponseEntity.ok(recordESave);
+
+        return new BuildingRecordResponse(recordEntity.getBody().getAddress(),
+                recordEntity.getBody().getSize(), recordEntity.getBody().getValue(),
+                new OwnerResponse(recordEntity.getBody().getOwner().getName()),
+                new PropertyResponse(recordEntity.getBody().getPropertyType().getType(),
+                        recordEntity.getBody().getPropertyType().getTax_rate()));
     }
 }
