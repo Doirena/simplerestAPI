@@ -1,6 +1,9 @@
 package com.dovile.simplerest.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "owner")
@@ -12,6 +15,9 @@ public class OwnerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<BuildingRecordEntity> buildingRecord;
 
     public OwnerEntity() {
     }
@@ -37,8 +43,16 @@ public class OwnerEntity {
         this.name = name;
     }
 
+    public List<BuildingRecordEntity> getBuildingRecord() {
+        return buildingRecord;
+    }
+
+    public void setBuildingRecord(List<BuildingRecordEntity> buildingRecord) {
+        this.buildingRecord = buildingRecord;
+    }
+
     @Override
     public String toString() {
-        return  id + name;
+        return  id +" "+ name + " " + buildingRecord;
     }
 }
