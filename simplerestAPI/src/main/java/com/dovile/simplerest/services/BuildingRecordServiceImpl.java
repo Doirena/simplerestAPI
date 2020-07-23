@@ -98,10 +98,10 @@ public class BuildingRecordServiceImpl implements BuildingRecordService {
         return response;
     }
 
-    @Override
+
     public String calculateTaxesByOwnerId(Integer id) {
         String result = buildingRecordRepository.RealEstateTaxes(id);
-        if (result == null){
+        if (result == null) {
             throw new ArithmeticException("Owner not found");
         }
         return result;
