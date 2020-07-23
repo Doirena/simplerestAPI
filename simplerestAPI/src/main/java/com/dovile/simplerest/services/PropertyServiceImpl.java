@@ -46,8 +46,18 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public PropertyResponse refurbishProperty(Integer id, PropertyRequest property) {
-        return null;
+    public PropertyResponse refurbishProperty(Integer id, PropertyRequest property) throws ResourceNotFoundException {
+        PropertyEntity propertyE = propertyRespository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Property not found on: " + id));
+
+        propertyE.setTax_rate(property.getTax_rate());
+        if (property.getType() != null) {
+            property.setType(property.getType());
+        }
+        //property.setBuildingRecords(propertyDetails.getBuildingRecords());
+        propertyRespository.save(propertyE);
+        return new PropertyResponse(ResponseEntity.ok(propertyE).getBody().getType(),
+                ResponseEntity.ok(propertyE).getBody().getTax_rate());
     }
 
     @Override
