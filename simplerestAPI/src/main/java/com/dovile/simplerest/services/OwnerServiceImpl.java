@@ -36,9 +36,7 @@ public class OwnerServiceImpl implements OwnerService {
         OwnerEntity ownerE = new OwnerEntity();
         ownerE.setName(owner.getName());
         ownerRepository.save(ownerE);
-        OwnerResponse ownerResponse = new OwnerResponse();
-        ownerResponse.setName(ownerE.getName());
-        return ownerResponse;
+        return new OwnerResponse(ownerE.getName());
     }
 
     public Map<String, Boolean> deleteOwnerById(Integer id) throws Exception {
