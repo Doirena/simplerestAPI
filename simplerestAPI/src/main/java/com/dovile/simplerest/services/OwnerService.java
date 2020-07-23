@@ -20,8 +20,10 @@ public interface OwnerService {
     List<OwnerResponse> findAllOwners();
 
     /**
+     *
      * @param id
      * @return Owner by id
+     * @throws ResourceNotFoundException
      */
     OwnerResponse findOwnerById(Integer id) throws ResourceNotFoundException;
 
@@ -35,6 +37,7 @@ public interface OwnerService {
      *
      * @param id
      * @return true/false
+     * @throws Exception
      */
     Map<String, Boolean> deleteOwnerById(Integer id) throws Exception;
 
@@ -49,6 +52,7 @@ public interface OwnerService {
      * @param id
      * @param owner
      * @return update Owner
+     * @throws ResourceNotFoundException
      */
     OwnerResponse refurbishOnwer(Integer id, OwnerRequest owner) throws ResourceNotFoundException;
 
