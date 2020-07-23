@@ -46,4 +46,12 @@ public interface BuildingRecordService {
      * @throws Exception
      */
     Map<String, Boolean> deleteRecord(Integer id) throws Exception;
+
+    /**
+     *
+     * @param id
+     * @return result what taxes by owner should be
+     */
+    String calculateTaxesByOwnerId(Integer id);
+
 }
