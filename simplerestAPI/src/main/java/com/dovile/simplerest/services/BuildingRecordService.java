@@ -53,4 +53,11 @@ public interface BuildingRecordService {
      */
     String calculateTaxesByOwnerId(Integer id);
 
+    /**
+     *
+     * @param id
+     * @return one Record
+     */
+    BuildingRecordResponse getOneRecord(Integer id) throws ResourceNotFoundException;
+
 }
