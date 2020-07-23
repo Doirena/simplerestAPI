@@ -36,9 +36,13 @@ public class PropertyServiceImpl implements PropertyService {
         return propertyResponse;
     }
 
-    @Override
     public PropertyResponse createProperty(PropertyRequest property) {
-        return null;
+        PropertyEntity propertyE = new PropertyEntity();
+        propertyE.setTax_rate(property.getTax_rate());
+        propertyE.setType(property.getType());
+        propertyRespository.save(propertyE);
+        PropertyResponse propertyResponse = new PropertyResponse(propertyE.getType(),propertyE.getTax_rate());
+        return propertyResponse;
     }
 
     @Override
