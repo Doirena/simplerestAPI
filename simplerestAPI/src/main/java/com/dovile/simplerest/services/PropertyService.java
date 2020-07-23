@@ -18,8 +18,10 @@ public interface PropertyService {
     List<PropertyResponse> findAllProperties();
 
     /**
+     *
      * @param id
      * @return Property by id
+     * @throws ResourceNotFoundException
      */
     PropertyResponse findPropertyById(Integer id) throws ResourceNotFoundException;
 
