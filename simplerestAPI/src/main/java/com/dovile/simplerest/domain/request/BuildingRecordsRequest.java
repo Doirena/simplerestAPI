@@ -29,4 +29,9 @@ public class BuildingRecordsRequest {
     public void setValue(double value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return address + " " + size +" " + value;
+    }
 }
