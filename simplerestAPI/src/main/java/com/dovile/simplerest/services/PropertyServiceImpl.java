@@ -2,7 +2,6 @@ package com.dovile.simplerest.services;
 
 import com.dovile.simplerest.domain.request.PropertyRequest;
 import com.dovile.simplerest.domain.response.PropertyResponse;
-import com.dovile.simplerest.entities.OwnerEntity;
 import com.dovile.simplerest.entities.PropertyEntity;
 import com.dovile.simplerest.exception.ResourceNotFoundException;
 import com.dovile.simplerest.repositories.PropertyRespository;
