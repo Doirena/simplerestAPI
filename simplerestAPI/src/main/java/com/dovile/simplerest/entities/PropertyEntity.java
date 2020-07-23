@@ -22,6 +22,14 @@ public class PropertyEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "propertyType")
     private List<BuildingRecordEntity> buildingRecord;
 
+    public PropertyEntity() {
+    }
+
+    public PropertyEntity(String type, double tax_rate) {
+        this.type = type;
+        this.tax_rate = tax_rate;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -56,6 +64,6 @@ public class PropertyEntity {
 
     @Override
     public String toString() {
-        return id+" "+type+" "+tax_rate+" "+buildingRecord;
+        return type+" "+tax_rate;
     }
 }
