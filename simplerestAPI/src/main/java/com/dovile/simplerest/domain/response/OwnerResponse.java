@@ -1,28 +1,26 @@
 package com.dovile.simplerest.domain.response;
 
-public class OwnerResponse {
+import com.dovile.simplerest.domain.request.OwnerRequest;
 
-    private String name;
+public class OwnerResponse extends OwnerRequest {
 
-    public OwnerResponse() {
+    private Integer id;
 
-    }
-    public OwnerResponse(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
+    public OwnerResponse(Integer id, String name) {
+        super(name);
+        this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
-        return "OwnerResponse{" +
-                "name='" + name + '\'' +
-                '}';
+        return id+" " + super.toString();
     }
 }

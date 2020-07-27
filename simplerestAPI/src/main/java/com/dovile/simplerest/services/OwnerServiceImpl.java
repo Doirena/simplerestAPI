@@ -20,7 +20,7 @@ public class OwnerServiceImpl implements OwnerService {
     public List<OwnerResponse> findAllOwners() {
         List<OwnerResponse> ownerList = new ArrayList<OwnerResponse>();
         for (OwnerEntity ownerE : ownerRepository.findAll()) {
-            ownerList.add(new OwnerResponse(ownerE.getName()));
+            ownerList.add(new OwnerResponse(ownerE.getId(), ownerE.getName()));
         }
         return ownerList;
     }
@@ -28,7 +28,8 @@ public class OwnerServiceImpl implements OwnerService {
     public OwnerResponse findOwnerById(Integer id) throws ResourceNotFoundException {
         OwnerEntity ownerE = ownerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Owner not found on: " + id));
-        return new OwnerResponse(ResponseEntity.ok().body(ownerE).getBody().getName());
+        return new OwnerResponse(ResponseEntity.ok().body(ownerE).getBody().getId(),
+                ResponseEntity.ok().body(ownerE).getBody().getName());
     }
 
 
@@ -36,7 +37,7 @@ public class OwnerServiceImpl implements OwnerService {
         OwnerEntity ownerE = new OwnerEntity();
         ownerE.setName(owner.getName());
         ownerRepository.save(ownerE);
-        return new OwnerResponse(ownerE.getName());
+        return new OwnerResponse(ownerE.getId(),ownerE.getName());
     }
 
     public Map<String, Boolean> deleteOwnerById(Integer id) throws Exception {
@@ -54,6 +55,7 @@ public class OwnerServiceImpl implements OwnerService {
         ownerE.setName(owner.getName());
         //ownerE.setBuildingRecord(owner.);
         ownerRepository.save(ownerE);
-        return new OwnerResponse(ResponseEntity.ok(ownerE).getBody().getName());
+        return new OwnerResponse(ResponseEntity.ok(ownerE).getBody().getId(),
+                ResponseEntity.ok(ownerE).getBody().getName());
     }
 }
