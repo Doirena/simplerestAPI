@@ -58,7 +58,6 @@ public class OwnerServiceImplTest {
         assertEquals(listOwner.get(0).getName(), expectedOwnerList.get(0).getName());
         assertEquals(listOwner.get(1).getName(), expectedOwnerList.get(1).getName());
         assertEquals(listOwner.get(2).getName(), expectedOwnerList.get(2).getName());
-
     }
 
     @Test
@@ -71,7 +70,6 @@ public class OwnerServiceImplTest {
         OwnerResponse ownerResponse = ownerServiceImpl.findOwnerById(id);
 
         assertEquals(ownerE.getName(), ownerResponse.getName());
-
     }
 
     @Test
@@ -85,7 +83,7 @@ public class OwnerServiceImplTest {
     }
 
     @Test
-    public void createOwner() {
+    public void createOwner_test() {
         OwnerEntity ownerE = new OwnerEntity(null, "Anna");
         given(ownerRepository.save(ownerE)).willAnswer(invocation -> invocation.getArgument(1));
 
@@ -96,13 +94,12 @@ public class OwnerServiceImplTest {
     }
 
     @Test
-    public void deleteOwnerById() throws Exception {
+    public void deleteOwnerById_test() throws Exception {
         //Given
         Integer id = 1;
         OwnerEntity ownerE = new OwnerEntity(id, "Anna");
 
-        when(ownerRepository.findById(id))
-                .thenReturn(java.util.Optional.of(ownerE));
+        when(ownerRepository.findById(id)).thenReturn(java.util.Optional.of(ownerE));
 
         // when
         final Map<String, Boolean> result = ownerServiceImpl.deleteOwnerById(id);
@@ -110,11 +107,10 @@ public class OwnerServiceImplTest {
         // then
         verify(ownerRepository, times(1)).delete(ownerE);
         assertEquals(true, result.containsKey("deleted"));
-
     }
 
     @Test
-    public void refurbishOwner() throws ResourceNotFoundException {
+    public void refurbishOwner_test() throws ResourceNotFoundException {
         Integer id = 1;
         OwnerEntity ownerE = new OwnerEntity(id, "Anna");
         when(ownerRepository.findById(id)).thenReturn(java.util.Optional.of(ownerE));

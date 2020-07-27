@@ -43,7 +43,7 @@ public class PropertyServiceImplTest {
     }
 
     @Test
-    public void findAllProperties() {
+    public void findAllProperties_test() {
         List<PropertyEntity> propertyEList = new ArrayList<PropertyEntity>();
         propertyEList.add(new PropertyEntity(1, "Flat", 20));
         propertyEList.add(new PropertyEntity(2, "House", 60));
@@ -56,11 +56,10 @@ public class PropertyServiceImplTest {
         assertEquals(3, propertyRList.size());
         verify(propertyRespository, times(1)).findAll();
         assertEquals(propertyEList.get(1).getType(), propertyRList.get(1).getType());
-
     }
 
     @Test
-    public void findPropertyById() throws ResourceNotFoundException {
+    public void findPropertyById_test() throws ResourceNotFoundException {
         Integer id = 1;
         PropertyEntity propertyE = new PropertyEntity(id, "Flat", 20);
         when(propertyRespository.findById(id)).thenReturn(java.util.Optional.of(propertyE));
@@ -70,7 +69,7 @@ public class PropertyServiceImplTest {
     }
 
     @Test
-    public void createProperty() {
+    public void createProperty_test() {
         PropertyEntity propertyE = new PropertyEntity(null, "Flat", 20);
         given(propertyRespository.save(propertyE)).willAnswer(invocation -> invocation.getArgument(1));
 
@@ -81,7 +80,7 @@ public class PropertyServiceImplTest {
     }
 
     @Test
-    public void refurbishProperty() throws ResourceNotFoundException {
+    public void refurbishProperty_test() throws ResourceNotFoundException {
         Integer id = 1;
         PropertyEntity propertyE = new PropertyEntity(id, "Flat", 20);
         when(propertyRespository.findById(id)).thenReturn(java.util.Optional.of(propertyE));
@@ -90,26 +89,21 @@ public class PropertyServiceImplTest {
 
         PropertyResponse propertyR = propertyServiceImpl.refurbishProperty(id, new PropertyRequest("House", 20));
 
-        //then
         assertThat(propertyR).isNotNull();
         assertEquals(propertyE.getType(), propertyR.getType());
     }
 
     @Test
-    public void deleteProperty() throws Exception {
+    public void deleteProperty_test() throws Exception {
         //Given
         Integer id = 1;
         PropertyEntity propertyE = new PropertyEntity(id, "Flat", 20);
 
-        when(propertyRespository.findById(id))
-                .thenReturn(java.util.Optional.of(propertyE));
+        when(propertyRespository.findById(id)).thenReturn(java.util.Optional.of(propertyE));
 
-        // when
         final Map<String, Boolean> result = propertyServiceImpl.deleteProperty(id);
 
-        // then
         verify(propertyRespository, times(1)).delete(propertyE);
         assertEquals(true, result.containsKey("deleted"));
-
     }
 }
