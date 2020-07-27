@@ -25,7 +25,8 @@ public class PropertyEntity {
     public PropertyEntity() {
     }
 
-    public PropertyEntity(String type, double tax_rate) {
+    public PropertyEntity(Integer id, String type, double tax_rate) {
+        this.id = id;
         this.type = type;
         this.tax_rate = tax_rate;
     }
