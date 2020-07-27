@@ -14,10 +14,10 @@ import org.mockito.Mock;
 
 import static org.mockito.ArgumentMatchers.any;
 
-import org.mockito.Mockito;
+
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.OngoingStubbing;
+
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -120,7 +120,6 @@ public class OwnerServiceImplTest {
         when(ownerRepository.findById(id)).thenReturn(java.util.Optional.of(ownerE));
         ownerE.setName("Tom");
         when(ownerRepository.save(ownerE)).thenReturn(ownerE);
-
 
         OwnerResponse ownerResponse = ownerServiceImpl.refurbishOwner(1, new OwnerRequest("Tom"));
 
