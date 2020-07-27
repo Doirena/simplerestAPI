@@ -25,6 +25,10 @@ public class OwnerEntity {
     public OwnerEntity(String name) {
         this.name = name;
     }
+    public OwnerEntity(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;
@@ -52,6 +56,6 @@ public class OwnerEntity {
 
     @Override
     public String toString() {
-        return  name;
+        return  id+" "+name;
     }
 }
