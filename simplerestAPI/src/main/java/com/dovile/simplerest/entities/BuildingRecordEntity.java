@@ -25,13 +25,20 @@ public class BuildingRecordEntity {
     public BuildingRecordEntity() {
     }
 
-    public BuildingRecordEntity(String address, double size, double value, OwnerEntity owner,
+    public BuildingRecordEntity(Integer id, String address, double size, double value, OwnerEntity owner,
                                 PropertyEntity propertyType) {
+        this.id = id;
         this.address = address;
         this.size = size;
         this.value = value;
         this.owner = owner;
         this.propertyType = propertyType;
+    }
+    public BuildingRecordEntity(Integer id, String address, double size, double value) {
+        this.id = id;
+        this.address = address;
+        this.size = size;
+        this.value = value;
     }
 
     public Integer getId() {
