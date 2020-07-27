@@ -6,6 +6,15 @@ public class BuildingRecordsRequest {
     private double size;
     private double value;
 
+    public BuildingRecordsRequest() {
+    }
+
+    public BuildingRecordsRequest(String address, double size, double value) {
+        this.address = address;
+        this.size = size;
+        this.value = value;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -32,6 +41,6 @@ public class BuildingRecordsRequest {
 
     @Override
     public String toString() {
-        return address + " " + size +" " + value;
+        return address + " " + size + " " + value;
     }
 }

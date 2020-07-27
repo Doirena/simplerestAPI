@@ -1,46 +1,29 @@
 package com.dovile.simplerest.domain.response;
 
-public class BuildingRecordResponse {
-    private String address;
-    private double size;
-    private double value;
+import com.dovile.simplerest.domain.request.BuildingRecordsRequest;
+
+public class BuildingRecordResponse extends BuildingRecordsRequest {
+
+    private Integer id;
     private OwnerResponse owner;
     private PropertyResponse property;
 
     public BuildingRecordResponse() {
     }
 
-    public BuildingRecordResponse(String address, double size, double value,
-                                  OwnerResponse owner, PropertyResponse property) {
-        this.address = address;
-        this.size = size;
-        this.value = value;
+    public BuildingRecordResponse(Integer id, String address, double size, double value, OwnerResponse owner, PropertyResponse property) {
+        super(address, size, value);
+        this.id = id;
         this.owner = owner;
         this.property = property;
     }
 
-    public String getAddress() {
-        return address;
+    public Integer getId() {
+        return id;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public double getSize() {
-        return size;
-    }
-
-    public void setSize(double size) {
-        this.size = size;
-    }
-
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public OwnerResponse getOwner() {
@@ -61,12 +44,6 @@ public class BuildingRecordResponse {
 
     @Override
     public String toString() {
-        return "BuildingRecordResponse{" +
-                "address='" + address + '\'' +
-                ", size=" + size +
-                ", value=" + value +
-                ", owner=" + owner +
-                ", property=" + property +
-                '}';
+        return id + " " + owner + " " + property + " " + super.toString();
     }
 }

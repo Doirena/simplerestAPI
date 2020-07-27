@@ -35,7 +35,7 @@ public class BuildingRecordServiceImpl implements BuildingRecordService {
     public List<BuildingRecordResponse> findAllRecords() {
         List<BuildingRecordResponse> listRecords = new ArrayList<BuildingRecordResponse>();
         for (BuildingRecordEntity recordE : buildingRecordRepository.findAll()) {
-            listRecords.add(new BuildingRecordResponse(recordE.getAddress(), recordE.getSize(), recordE.getValue(),
+            listRecords.add(new BuildingRecordResponse(recordE.getId(),recordE.getAddress(), recordE.getSize(), recordE.getValue(),
                     new OwnerResponse(recordE.getOwner().getId(),recordE.getOwner().getName()),
                     new PropertyResponse(recordE.getPropertyType().getId(),
                             recordE.getPropertyType().getType(), recordE.getPropertyType().getTax_rate())));
@@ -61,7 +61,7 @@ public class BuildingRecordServiceImpl implements BuildingRecordService {
         recordE.setSize(record.getSize());
         recordE.setValue(record.getValue());
         buildingRecordRepository.save(recordE);
-        return new BuildingRecordResponse(recordE.getAddress(), recordE.getSize(), recordE.getValue(),
+        return new BuildingRecordResponse(recordE.getId(),recordE.getAddress(), recordE.getSize(), recordE.getValue(),
                 new OwnerResponse(recordE.getOwner().getId(),recordE.getOwner().getName()),
                 new PropertyResponse(recordE.getPropertyType().getId(),
                         recordE.getPropertyType().getType(), recordE.getPropertyType().getTax_rate()));
@@ -83,7 +83,7 @@ public class BuildingRecordServiceImpl implements BuildingRecordService {
         BuildingRecordEntity recordESave = buildingRecordRepository.save(recordE);
         ResponseEntity<BuildingRecordEntity> recordEntity = ResponseEntity.ok(recordESave);
 
-        return new BuildingRecordResponse(recordEntity.getBody().getAddress(),
+        return new BuildingRecordResponse(recordEntity.getBody().getId(),recordEntity.getBody().getAddress(),
                 recordEntity.getBody().getSize(), recordEntity.getBody().getValue(),
                 new OwnerResponse(recordEntity.getBody().getOwner().getId(),recordEntity.getBody().getOwner().getName()),
                 new PropertyResponse(recordEntity.getBody().getPropertyType().getId(),
@@ -113,7 +113,7 @@ public class BuildingRecordServiceImpl implements BuildingRecordService {
     public BuildingRecordResponse getOneRecord(Integer id) throws ResourceNotFoundException {
         BuildingRecordEntity recordE = buildingRecordRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Record not found on: " + id));
-        return new BuildingRecordResponse(recordE.getAddress(), recordE.getSize(), recordE.getValue(),
+        return new BuildingRecordResponse(recordE.getId(),recordE.getAddress(), recordE.getSize(), recordE.getValue(),
                 new OwnerResponse(recordE.getOwner().getId(),recordE.getOwner().getName()),
                 new PropertyResponse(recordE.getPropertyType().getId(),
                         recordE.getPropertyType().getType(), recordE.getPropertyType().getTax_rate()));
