@@ -46,10 +46,10 @@ public class BuildingRecordControllerTestM {
     @Test
     public void getAllRecords() throws Exception {
         given(service.findAllRecords()).willReturn(
-                Arrays.asList(new BuildingRecordResponse("Vilnius", 2.0, 3.0,
-                                new OwnerResponse("Anna"), new PropertyResponse("Flat",3.0)),
-                        new BuildingRecordResponse("Kaunas", 4.0, 5.0,
-                                new OwnerResponse("Tom"), new PropertyResponse("House",6.0))
+                Arrays.asList(new BuildingRecordResponse(1,"Vilnius", 2.0, 3.0,
+                                new OwnerResponse(1, "Anna"), new PropertyResponse(1,"Flat",3.0)),
+                        new BuildingRecordResponse(2,"Kaunas", 4.0, 5.0,
+                                new OwnerResponse(20,"Tom"), new PropertyResponse(2,"House",6.0))
                 ));
 
         RequestBuilder request = MockMvcRequestBuilders
@@ -60,29 +60,6 @@ public class BuildingRecordControllerTestM {
                 .andExpect(status().isOk())
                 .andExpect(content().json("[{\"address\":\"Vilnius\",\"size\":2.0,\"value\":3.0,\"owner\":{\"name\":\"Anna\"},\"property\":{\"type\":\"Flat\",\"tax_rate\":3.0}},{\"address\":\"Kaunas\",\"size\":4.0,\"value\":5.0,\"owner\":{\"name\":\"Tom\"},\"property\":{\"type\":\"House\",\"tax_rate\":6.0}}]"))
                 .andReturn();
-    }
-
-    @Test
-    public void createRecordTest() throws Exception {
-        BuildingRecordResponse record = new BuildingRecordResponse();
-        record.setAddress("Naugagardukas str. 1, Vilnius");
-        record.setSize(200);
-        record.setValue(30);
-        BuildingRecordsRequest recordQ = new BuildingRecordsRequest();
-        recordQ.setAddress("Naugagardukas str. 1, Vilnius");
-        recordQ.setSize(200);
-        recordQ.setValue(30);
-
-
-        when(service.createRecord(recordQ,"Anna","Flat")).thenReturn(record);
-       // System.out.println(recordResponse);
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/records/record?owner=Anna&property=Flat")
-                .content(new ObjectMapper().writeValueAsString(record))
-                .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                //.andExpect(status().isCreated())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.address").value("Naugagardukas str. 1, Vilnius"))
-                .andExpect(status().isOk());
     }
 
 }
