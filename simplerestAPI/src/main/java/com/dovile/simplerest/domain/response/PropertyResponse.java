@@ -1,38 +1,29 @@
 package com.dovile.simplerest.domain.response;
 
-public class PropertyResponse {
-    private String type;
-    private double tax_rate;
+import com.dovile.simplerest.domain.request.PropertyRequest;
+
+public class PropertyResponse extends PropertyRequest {
+
+    private Integer id;
 
     public PropertyResponse() {
     }
 
-    public PropertyResponse(String type, double tax_rate) {
-        this.type = type;
-        this.tax_rate = tax_rate;
+    public PropertyResponse(Integer id, String type, double tax_rate) {
+        super(type, tax_rate);
+        this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public Integer getId() {
+        return id;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public double getTax_rate() {
-        return tax_rate;
-    }
-
-    public void setTax_rate(double tax_rate) {
-        this.tax_rate = tax_rate;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
-        return "PropertyResponse{" +
-                "type='" + type + '\'' +
-                ", tax_rate=" + tax_rate +
-                '}';
+        return id+" "+ super.toString();
     }
 }

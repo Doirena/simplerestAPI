@@ -23,7 +23,7 @@ public class PropertyServiceImpl implements PropertyService {
     public List<PropertyResponse> findAllProperties() {
         List<PropertyResponse> listProperties = new ArrayList<PropertyResponse>();
         for (PropertyEntity propertyE : propertyRespository.findAll()) {
-            listProperties.add(new PropertyResponse(propertyE.getType(), propertyE.getTax_rate()));
+            listProperties.add(new PropertyResponse(propertyE.getId(),propertyE.getType(),propertyE.getTax_rate()));
         }
         return listProperties;
     }
@@ -32,7 +32,8 @@ public class PropertyServiceImpl implements PropertyService {
     public PropertyResponse findPropertyById(Integer id) throws ResourceNotFoundException {
         PropertyEntity propertyE = propertyRespository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Property not found on: " + id));
-        PropertyResponse propertyResponse = new PropertyResponse(ResponseEntity.ok().body(propertyE).getBody().getType(),
+        PropertyResponse propertyResponse = new PropertyResponse(ResponseEntity.ok().body(propertyE).getBody().getId(),
+                ResponseEntity.ok().body(propertyE).getBody().getType(),
                 ResponseEntity.ok().body(propertyE).getBody().getTax_rate());
         return propertyResponse;
     }
@@ -42,7 +43,7 @@ public class PropertyServiceImpl implements PropertyService {
         propertyE.setTax_rate(property.getTax_rate());
         propertyE.setType(property.getType());
         propertyRespository.save(propertyE);
-        return new PropertyResponse(propertyE.getType(), propertyE.getTax_rate());
+        return new PropertyResponse (propertyE.getId(),propertyE.getType(),propertyE.getTax_rate());
     }
 
     public PropertyResponse refurbishProperty(Integer id, PropertyRequest property) throws ResourceNotFoundException {
@@ -56,7 +57,8 @@ public class PropertyServiceImpl implements PropertyService {
         }
         //property.setBuildingRecords(propertyDetails.getBuildingRecords());
         propertyRespository.save(propertyE);
-        return new PropertyResponse(ResponseEntity.ok(propertyE).getBody().getType(),
+        return new PropertyResponse(ResponseEntity.ok(propertyE).getBody().getId(),
+                ResponseEntity.ok(propertyE).getBody().getType(),
                 ResponseEntity.ok(propertyE).getBody().getTax_rate());
     }
 

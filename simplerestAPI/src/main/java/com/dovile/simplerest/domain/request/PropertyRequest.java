@@ -27,4 +27,9 @@ public class PropertyRequest {
     public void setTax_rate(double tax_rate) {
         this.tax_rate = tax_rate;
     }
+
+    @Override
+    public String toString() {
+        return type +" "+ tax_rate;
+    }
 }
